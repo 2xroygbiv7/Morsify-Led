@@ -1,4 +1,12 @@
-int dot_time = 300;
+// Morsify Led
+// Converts a string to Morse Code
+
+// Limitations
+// Case statement for characters s and o only
+//
+
+// Time period of element in accordance with International Morse Code Standard
+int dot_time = 200;
 int dash_time = dot_time * 3;
 int char_space_time = dot_time;
 int letter_space_time = dot_time * 3;
@@ -9,42 +17,17 @@ void setup() {
   Serial.begin(9600);
   pinMode(8, OUTPUT);
   Serial.println("Simple Led Control - SOS in Morse Code");
-  Serial.println("Press any key to start.");
-  
-  //String sentence = "sos";
-  //Serial.print("Sentence value in setup scope: ");
-  //Serial.println(sentence);
-  //morsify(sentence);
+  Serial.println("Send any key to start.");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  
   while (Serial.available() == 0) {}
-  String sentence = "sos";
+  String sentence = "sos ";
   morsify(sentence);
-  //  dot();
-  //  dot();
-  //  dot();
-  //  delay(letter_space_time);
-  //  dash();
-  //  dash();
-  //  dash();
-  //  delay(letter_space_time);
-  //  dot();
-  //  dot();
-  //  dot();
-  //  delay(letter_space_time);
 }
 
 void morsify(String sentence) {
-  //Serial.print("Sentence value in morsify scope: ");
-  //Serial.println(sentence);
-  //Serial.println(sentence.length());
-  //Serial.println(sentence.charAt(0));
   for (unsigned int i = 0; i < sentence.length(); i++) {
-    //Serial.print(i);
-    //Serial.println(sentence.charAt(i));
     switch (sentence.charAt(i)) {
       case 'o': {
           Serial.println("o - dash dash dash");
@@ -60,6 +43,11 @@ void morsify(String sentence) {
           dot();
           break;
         }
+      case ' ': {
+        Serial.println("space");
+        delay(word_space_time);
+        break;
+      }
     }
   }
 }
